@@ -1,0 +1,23 @@
+{
+  "name": "pacman-phaser",
+  "version": "1.0.0",
+  "description": "Pacman built with Phaser.io",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "webpack-dev-server",
+    "build": "webpack"
+  },
+  "author": "Mickael Alliel",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.2",
+    "morgan": "^1.9.0",
+    "phaser-ce": "^2.9.1"
+  },
+  "devDependencies": {
+    "expose-loader": "^0.7.3",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.3"
+  }
+}

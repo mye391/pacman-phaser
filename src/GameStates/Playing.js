@@ -30,7 +30,7 @@ export default {
             this.load.image('safetile', 'assets/maps/safetile.png');
 
             // Items
-            this.load.image('pill', 'assets/sprites/pills/spr_pill_0.png');
+            this.load.image('pill', 'assets/sprites/pills/avocado-icon.png');
             this.load.image('powerpill', 'assets/sprites/pills/spr_power_pill_0.png');
             this.load.image('cherry', 'assets/sprites/cherry/spr_cherry_0.png');
 
@@ -112,7 +112,7 @@ export default {
                   this.add.text(220, 300, "Congratulations !", {fill: 'white', backgroundColor: 'black'});
                   this.add.text(150, 330, "Refresh to restart the game.", {fill: 'white', backgroundColor: 'black'});
             }
-            
+
 	}
 };
 

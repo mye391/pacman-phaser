@@ -1,6 +1,6 @@
 import Pacman from '../Entities/Pacman';
 import Ghost from '../Entities/Ghost';
-
+// import recognition from '../Entities/SpeechRec'
 
 export default {
       eatPill: function(pacman, dot) {

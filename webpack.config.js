@@ -13,6 +13,9 @@ module.exports = {
     path: path.join(__dirname, 'public', 'assets', 'scripts')
   },
 
+  node: {
+    fs: 'empty'
+  },
   /**
    * Minimal development setup.
    * Serves files in ./public folder.

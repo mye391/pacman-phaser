@@ -4,40 +4,84 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Pacman-Phaser</title>
-    <meta name="author" content="Mickael Alliel">
-    <meta name="description" content="Pacman clone built with Phaser.js">
-    <meta name="keywords" content="pacman,clone,js,phaser">
+    <title>PAC TO ME</title>
+    <!-- <meta name="author" content="Mickael Alliel">
+      <meta name="description" content="Pacman clone built with Phaser.js">
+      <meta name="keywords" content="pacman,clone,js,phaser"> -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 
     <style>
       body {
         margin: 0;
-      }
 
+        background-color: #ffffff;
+      }
 
       #background {
         display: flex;
         justify-content: center;
         align-items: center;
-
-        /* background-image: url('assets/background.jpg'); */
-        background-size: cover;
-
         height: 100vh;
       }
+
+      #game {
+        padding: 30px
+      }
+
+      .output {
+        color: #000000
+      }
+
     </style>
   </head>
   <body>
     <div id="background">
       <div id="game"></div>
-    </div>
-    <div>
-      <button>TALK TO ME</button>
-      <div>
-        <p class="output"><em>...diagnostic messages</em></p>
+      <div id="language">
+        <form>
+          <select id="selectLang" name="language">
+            <option value="af-ZA">Afrikaans</option>
+            <option value="id-ID">Bahasa Indonesia</option>
+            <option value="ms-MY">Bahasa Melayu</option>
+            <option value="ca-ES">Català</option>
+            <option value="cs-CZ">Čeština</option>
+            <option value="de-DE">Deutsch</option>
+            <option value="en-US" selected>English</option>
+            <option value="es-PR">Español</option>
+            <option value="eu-ES">Euskara</option>
+            <option value="fr-FR">Français</option>
+            <option value="gl-ES">Galego</option>
+            <option value="hr-HR">Hrvatski</option>
+            <option value="zu-ZA">IsiZulu</option>
+            <option value="is-IS">Íslenska</option>
+            <option value="it-IT">Italiano</option>
+            <option value="hu-HU">Magyar</option>
+            <option value="nl-NL">Nederlands</option>
+            <option value="nb-NO">Norsk bokmål</option>
+            <option value="pl-PL">Polski</option>
+            <option value="pt-BR">Português</option>
+            <option value="ro-RO">Română</option>
+            <option value="sk-SK">Slovenčina</option>
+            <option value="fi-FI">Suomi</option>
+            <option value="sv-SE">Svenska</option>
+            <option value="tr-TR">Türkçe</option>
+            <option value="bg-BG">български</option>
+            <option value="ru-RU">Pусский</option>
+            <option value="sr-RS">Српски</option>
+            <option value="ko-KR">한국어</option>
+            <option value="cmn-Hans-CN">中文</option>
+            <option value="ja-JP">日本語</option>
+          </select>
+          <span>
+            <button type="button">FEED ME</button>
+          </span>
+        </form>
+        <div>
+          <p class="output">WHERE DO I GO?</p>
+        </div>
       </div>
     </div>
+    <script src="/src/Entities/Pacman.js" type="text/html"></script>
     <script src="./assets/scripts/bundle.js"></script>
   </body>
-</html>
+  </html>

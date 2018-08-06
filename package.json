@@ -13,7 +13,8 @@
   "dependencies": {
     "express": "^4.16.2",
     "morgan": "^1.9.0",
-    "phaser-ce": "^2.9.1"
+    "phaser-ce": "^2.9.1",
+    "watson-developer-cloud": "^3.7.1"
   },
   "devDependencies": {
     "expose-loader": "^0.7.3",

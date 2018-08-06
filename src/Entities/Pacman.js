@@ -1,3 +1,10 @@
+let fs = require ('fs');
+let https = require ('https');
+let subscriptionKey = '3dc0c7a09697463287d93fbab7f90dc3';
+let host = 'api.cognitive.microsofttranslator.com';
+let path = '/translate?api-version=3.0';
+let params = '&to=en';
+
 export default class Pacman {
 	constructor() {
 		this.name = 'pacman';
@@ -97,7 +104,6 @@ Pacman.prototype.checkDirection = function(direction, game) {
 		return;
 	}
 
-
 	this.turning = direction;
 
     this.turnPoint.x = (this.marker.x * this.width) + (this.width / 2);
@@ -120,6 +126,7 @@ Pacman.prototype.checkDirection = function(direction, game) {
 }
 
 Pacman.prototype.handleInput = function(game) {
+	let language = document.getElementById("selectLang").value
 	const SpeechRecognition = webkitSpeechRecognition
 	const SpeechGrammarList = webkitSpeechGrammarList
 	const SpeechRecognitionEvent = webkitSpeechRecognitionEvent
@@ -128,7 +135,7 @@ Pacman.prototype.handleInput = function(game) {
 
 	const testBtn = document.querySelector('button')
 
-	const controls = ['up', 'down', 'left', 'right']
+	const controls = ['up', 'down', 'left', 'right', 'restart']
 	const grammar = 'JSGF V1.0; grammar controls; public <control> = ' + controls.join(' | ') + ' ;'
 
 	const recognition = new SpeechRecognition();
@@ -136,29 +143,75 @@ Pacman.prototype.handleInput = function(game) {
 	speechRecognitionList.addFromString(grammar, 1);
 	recognition.grammars = speechRecognitionList
 	recognition.continuous = true;
-	recognition.lang = 'en-US';
+	recognition.lang = language;
 	recognition.interimResults = false;
 	recognition.maxAlternatives = 1;
 
 	recognition.onresult = (event) => {
-	let last = event.results.length - 1;
-	let control = event.results[last][0].transcript;
-
-	diagnostic.textContent = 'Result received: ' + control + '.';
-
-	console.log('Confidence: ' + event.results[0][0].confidence)
+		let last = event.results.length - 1;
+		let control = event.results[last][0].transcript;
 		control = control.trim();
-		if (control == 'up') {
+
+		diagnostic.textContent = 'Command received: ' + control.toUpperCase();
+
+		console.log('Confidence: ' + event.results[0][0].confidence)
+
+		let response_handler = function (response) {
+			let body = '';
+			response.on('data', function (d) {
+				body += d;
+			});
+			response.on('end', function () {
+				let json = JSON.stringify(JSON.parse(body), null, 4);
+				console.log('am i here?', json);
+				const translated = JSON.parse(body)[0].translations[0].text.toLowerCase()
+				console.log('translated?????', translated)
+			});
+			response.on('error', function (e) {
+				console.log('Error: ' + e.message);
+			});
+		};
+
+		let get_guid = function () {
+			return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+				var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+				return v.toString(16);
+			});
+		}
+
+		let Translate = function (content) {
+			let request_params = {
+				method : 'POST',
+				hostname : host,
+				path : path + params,
+				headers : {
+					'Content-Type' : 'application/json',
+					'Ocp-Apim-Subscription-Key' : subscriptionKey,
+					'X-ClientTraceId' : get_guid (),
+				}
+			};
+
+			let req = https.request(request_params, response_handler);
+
+			req.write(content);
+			req.end();
+		}
+
+		let content = JSON.stringify([{'Text': control}]);
+		console.log('content', JSON.parse(content)[0].Text)
+
+		Translate(content);
+
+		if (control === 'up') {
 			this.checkDirection(this.directions.up, game);
-		}
-		else if (control == 'down') {
+		} else if (control === 'down') {
 			this.checkDirection(this.directions.down, game);
-		}
-		else if (control == 'right') {
+		} else if (control === 'right') {
 			this.checkDirection(this.directions.right, game);
-		}
-		else if (control == 'left') {
+		} else if (control === 'left') {
 			this.checkDirection(this.directions.left, game);
+		} else if (control === 'restart') {
+			location.reload(true)
 		}
 	}
 
@@ -181,7 +234,6 @@ Pacman.prototype.handleInput = function(game) {
 
 	recognition.onspeechend = () => {
 		console.log('SpeechRecognition.onspeechend')
-		// recognition.stop();
 	}
 
 	recognition.onsoundend = (event) => {
@@ -194,7 +246,6 @@ Pacman.prototype.handleInput = function(game) {
 
 	recognition.onend = (event) => {
 		console.log('SpeechRecognition.onend')
-		// recognition.start()
 	}
 
 	recognition.onerror = (event) => {
@@ -208,8 +259,8 @@ Pacman.prototype.handleInput = function(game) {
 	}
 
 	testBtn.onclick = () => {
-	recognition.start();
-	console.log('Ready to receive voice command.');
+		recognition.start();
+		console.log('Ready to receive voice command.');
 	}
 }
 

@@ -154,7 +154,7 @@ Pacman.prototype.handleInput = function(game) {
 
 		diagnostic.textContent = 'Command received: ' + control.toUpperCase();
 
-		console.log('Confidence: ' + event.results[0][0].confidence)
+		// console.log('Confidence: ' + event.results[0][0].confidence)
 
 		let response_handler = function (response) {
 			let body = '';
@@ -163,9 +163,9 @@ Pacman.prototype.handleInput = function(game) {
 			});
 			response.on('end', function () {
 				let json = JSON.stringify(JSON.parse(body), null, 4);
-				console.log('am i here?', json);
-				const translated = JSON.parse(body)[0].translations[0].text.toLowerCase()
-				console.log('translated?????', translated)
+				console.log(json);
+				// const translated = JSON.parse(body)[0].translations[0].text.toLowerCase()
+				// console.log('translated?????', translated)
 			});
 			response.on('error', function (e) {
 				console.log('Error: ' + e.message);
@@ -187,7 +187,7 @@ Pacman.prototype.handleInput = function(game) {
 				headers : {
 					'Content-Type' : 'application/json',
 					'Ocp-Apim-Subscription-Key' : subscriptionKey,
-					'X-ClientTraceId' : get_guid (),
+					'X-ClientTraceId' : get_guid ()
 				}
 			};
 
@@ -198,7 +198,7 @@ Pacman.prototype.handleInput = function(game) {
 		}
 
 		let content = JSON.stringify([{'Text': control}]);
-		console.log('content', JSON.parse(content)[0].Text)
+		console.log('content', content)
 
 		Translate(content);
 
@@ -215,38 +215,38 @@ Pacman.prototype.handleInput = function(game) {
 		}
 	}
 
-	recognition.onstart = (event) => {
-		console.log('SpeechRecognition.onstart')
-	}
-	recognition.onaudiostart = (event) => {
-		console.log('SpeechRecognition.onaudiostart')
-	}
+	// recognition.onstart = (event) => {
+	// 	console.log('SpeechRecognition.onstart')
+	// }
+	// recognition.onaudiostart = (event) => {
+	// 	console.log('SpeechRecognition.onaudiostart')
+	// }
 
-	recognition.onsoundstart = (event) => {
-		console.log('SpeechRecognition.onsoundstart')
-	}
+	// recognition.onsoundstart = (event) => {
+	// 	console.log('SpeechRecognition.onsoundstart')
+	// }
 
-	recognition.onspeechstart = (event) => {
-		console.log('SpeechRecognition.onspeechstart')
-	}
+	// recognition.onspeechstart = (event) => {
+	// 	console.log('SpeechRecognition.onspeechstart')
+	// }
 
 	// recognition.onresult happens here
 
-	recognition.onspeechend = () => {
-		console.log('SpeechRecognition.onspeechend')
-	}
+	// recognition.onspeechend = () => {
+	// 	console.log('SpeechRecognition.onspeechend')
+	// }
 
-	recognition.onsoundend = (event) => {
-		console.log('SpeechRecognition.onsoundend')
-	}
+	// recognition.onsoundend = (event) => {
+	// 	console.log('SpeechRecognition.onsoundend')
+	// }
 
-	recognition.onaudioend = (event) => {
-		console.log('SpeechRecognition.onaudioend')
-	}
+	// recognition.onaudioend = (event) => {
+	// 	console.log('SpeechRecognition.onaudioend')
+	// }
 
-	recognition.onend = (event) => {
-		console.log('SpeechRecognition.onend')
-	}
+	// recognition.onend = (event) => {
+	// 	console.log('SpeechRecognition.onend')
+	// }
 
 	recognition.onerror = (event) => {
 		console.log('ERROR!!!!!')

@@ -8,8 +8,8 @@ export default {
       },
       dead: function(pacman, ghost) {
             pacman.kill();
-            this.add.text(140, 300, "You died! Good luck next time...", {fill: 'white', backgroundColor: 'red'});
-            this.add.text(150, 330, "Say 'RESTART' to play again.", {fill: 'white', backgroundColor: 'red'});
+            this.add.text(140, 300, "You died! Good luck next time...", {fill: 'red', backgroundColor: 'black'});
+            this.add.text(150, 330, "Say 'RESTART' to play again.", {fill: 'red', backgroundColor: 'black'});
       },
       stopGhost: function(ghost, wall) {
             if (this.ghost_blue.sprite == ghost) {
